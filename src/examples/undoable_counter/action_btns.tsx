@@ -12,7 +12,7 @@ const ActionButtons = () => {
             <button onClick={() => dispatch({ type: 'redo' })} disabled={undoStack.length === 0}>
                 Redo
             </button>
-            <button onClick={() => dispatch({ type: 'reset' })} disabled={history.length === 0}>
+            <button onClick={() => dispatch({ type: 'reset' })} disabled={history.length === 0 && undoStack.length === 0}>
                 Reset
             </button>
         </div>
