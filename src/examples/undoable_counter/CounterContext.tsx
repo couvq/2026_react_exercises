@@ -44,6 +44,8 @@ const undoableCounterReducer = (state: UndoableCounterState, action: UndoableCou
                 ...state,
                 result,
                 history: [...state.history, { operation: action.operation, appliedValue: action.value, oldValue: state.result, newValue: result }],
+                undoStack: [], // any new action invalidates the redo history
+
             }
         case 'reset':
             return {
