@@ -1,15 +1,26 @@
 import Actions from "./Actions"
 import { List } from "./List"
 import "./transfer_list.css"
+import { ListProvider, useList } from "./TransferListContext"
+
+const ListContainer = () => {
+    const state = useList();
+    
+    return (
+        <div className="transfer-list">
+            <List items={state?.left ?? []} />
+            <Actions />
+            <List items={state?.right ?? []} />
+        </div>
+    )
+}
 
 const TransferList = () => {
-  return (
-    <div className="transfer-list">
-      <List items={[{ isSelected: false, label: "Item 1"}, { isSelected: true, label: "Item 2"}]} />
-      <Actions />
-      <List items={[{ isSelected: false, label: "Item 3"}, { isSelected: true, label: "Item 4"}]} />
-    </div>
-  )
+    return (
+        <ListProvider>
+            <ListContainer />
+        </ListProvider>
+    )
 }
 
 export default TransferList
