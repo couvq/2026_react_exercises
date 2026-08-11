@@ -1,0 +1,23 @@
+.undoable_counter {
+    display: flex;
+    flex-direction: column;
+    max-width: max-content;
+}
+
+.result {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.action_buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem
+}
+
+.btn_grouping {
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem
+}
