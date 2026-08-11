@@ -27,7 +27,7 @@ const listReducer = (state: ListState, action: ListAction): ListState => {
         case 'toggleSelect':
             return {
                 left: state.left.map(item => item.label === action.label ? { ...item, isSelected: !item.isSelected } : item),
-                right: state.right.map(item => item.label === action.label ? { ...item, isSelected: !item.isSelected } : item), 
+                right: state.right.map(item => item.label === action.label ? { ...item, isSelected: !item.isSelected } : item),
             }
         case 'moveAllLeft':
             return {
@@ -40,11 +40,15 @@ const listReducer = (state: ListState, action: ListAction): ListState => {
                 right: [...state.right, ...state.left]
             };
         case 'moveSelectedLeft':
-            // TODO: Implementation for moving selected items left
-            break;
+            return {
+                left: [...state.left, ...state.right.filter(item => item.isSelected)],
+                right: state.right.filter(item => !item.isSelected)
+            }
         case 'moveSelectedRight':
-            // TODO: Implementation for moving selected items right
-            break;
+            return {
+                left: state.left.filter(item => !item.isSelected),
+                right: [...state.right, ...state.left.filter(item => item.isSelected)]
+            }
         default:
             throw new Error(`Unknown action: ${action}`);
     }
