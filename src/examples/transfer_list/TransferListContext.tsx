@@ -1,7 +1,7 @@
-import { act, createContext, useContext, useReducer, type ReactNode } from "react";
+import { createContext, useContext, useReducer, type ReactNode } from "react";
 import type { Item } from "./types";
 
-type ListState = {
+export type ListState = {
     left: Item[];
     right: Item[];
 }
