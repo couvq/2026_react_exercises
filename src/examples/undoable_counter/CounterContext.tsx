@@ -10,10 +10,11 @@ type HistoryEntry = {
 export type UndoableCounterState = {
     result: number;
     history: HistoryEntry[];
+    undoStack: HistoryEntry[];
 };
 
 export type UndoableCounterAction =
-    | { type: 'math'; operation: '+' | '-' | 'x' | '/'; value: number } | { type: 'reset' };
+    | { type: 'math'; operation: '+' | '-' | 'x' | '/'; value: number } | { type: 'reset' } | { type: 'undo' };
 
 const UndoableCounterContext = createContext<UndoableCounterState | null>(null);
 const UndoableCounterDispatchContext = createContext<Dispatch<UndoableCounterAction> | null>(null);
@@ -40,6 +41,7 @@ const undoableCounterReducer = (state: UndoableCounterState, action: UndoableCou
             }
             const result = calculateResult(action.operation, state.result, action.value);
             return {
+                ...state,
                 result,
                 history: [...state.history, { operation: action.operation, appliedValue: action.value, oldValue: state.result, newValue: result }],
             }
@@ -47,6 +49,16 @@ const undoableCounterReducer = (state: UndoableCounterState, action: UndoableCou
             return {
                 result: 0,
                 history: [],
+                undoStack: [],
+            }
+        case 'undo':
+            if (state.history.length === 0) {
+                throw new Error("No actions to undo.");
+            }
+            return {
+                result: state.history[state.history.length - 1].oldValue,
+                history: state.history.slice(0, -1),
+                undoStack: [...state.undoStack, state.history[state.history.length - 1]],
             }
         default:
             throw new Error(`Unknown action: ${JSON.stringify(action)}`);
@@ -56,6 +68,7 @@ const undoableCounterReducer = (state: UndoableCounterState, action: UndoableCou
 const initialState: UndoableCounterState = {
     result: 0,
     history: [],
+    undoStack: [],
 };
 
 
