@@ -13,7 +13,7 @@ export type UndoableCounterState = {
 };
 
 export type UndoableCounterAction =
-    | { type: 'math'; operation: '+' | '-' | 'x' | '/'; value: number };
+    | { type: 'math'; operation: '+' | '-' | 'x' | '/'; value: number } | { type: 'reset' };
 
 const UndoableCounterContext = createContext<UndoableCounterState | null>(null);
 const UndoableCounterDispatchContext = createContext<Dispatch<UndoableCounterAction> | null>(null);
@@ -42,6 +42,11 @@ const undoableCounterReducer = (state: UndoableCounterState, action: UndoableCou
             return {
                 result,
                 history: [...state.history, { operation: action.operation, appliedValue: action.value, oldValue: state.result, newValue: result }],
+            }
+        case 'reset':
+            return {
+                result: 0,
+                history: [],
             }
         default:
             throw new Error(`Unknown action: ${JSON.stringify(action)}`);
