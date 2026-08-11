@@ -1,10 +1,10 @@
-import TransferList from "./examples/transfer_list"
+import UndoableCounter from "./examples/undoable_counter"
 
 const App = () => {
 
   return (
     <>
-      <TransferList />
+      <UndoableCounter />
     </>
   )
 }
