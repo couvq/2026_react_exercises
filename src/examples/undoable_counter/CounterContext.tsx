@@ -14,7 +14,7 @@ export type UndoableCounterState = {
 };
 
 export type UndoableCounterAction =
-    | { type: 'math'; operation: '+' | '-' | 'x' | '/'; value: number } | { type: 'reset' } | { type: 'undo' };
+    | { type: 'math'; operation: '+' | '-' | 'x' | '/'; value: number } | { type: 'reset' } | { type: 'undo' } | { type: 'redo' };
 
 const UndoableCounterContext = createContext<UndoableCounterState | null>(null);
 const UndoableCounterDispatchContext = createContext<Dispatch<UndoableCounterAction> | null>(null);
@@ -59,6 +59,15 @@ const undoableCounterReducer = (state: UndoableCounterState, action: UndoableCou
                 result: state.history[state.history.length - 1].oldValue,
                 history: state.history.slice(0, -1),
                 undoStack: [...state.undoStack, state.history[state.history.length - 1]],
+            }
+        case 'redo':
+            if (state.undoStack.length === 0) {
+                throw new Error("No actions to redo.");
+            }
+            return {
+                result: state.undoStack[state.undoStack.length - 1].newValue,
+                history: [...state.history, state.undoStack[state.undoStack.length - 1]],
+                undoStack: state.undoStack.slice(0, -1),
             }
         default:
             throw new Error(`Unknown action: ${JSON.stringify(action)}`);
