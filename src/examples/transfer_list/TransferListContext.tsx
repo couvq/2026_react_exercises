@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, type ReactNode } from "react";
+import { act, createContext, useContext, useReducer, type ReactNode } from "react";
 import type { Item } from "./types";
 
 type ListState = {
@@ -17,10 +17,18 @@ type ListAction = {
     type: 'moveSelectedLeft';
 } | {
     type: 'moveSelectedRight';
-}
+} | {
+    type: 'toggleSelect';
+    label: string;
+};
 
 const listReducer = (state: ListState, action: ListAction): ListState => {
     switch (action.type) {
+        case 'toggleSelect':
+            return {
+                left: state.left.map(item => item.label === action.label ? { ...item, isSelected: !item.isSelected } : item),
+                right: state.right.map(item => item.label === action.label ? { ...item, isSelected: !item.isSelected } : item), 
+            }
         case 'moveAllLeft':
             return {
                 left: [...state.left, ...state.right],

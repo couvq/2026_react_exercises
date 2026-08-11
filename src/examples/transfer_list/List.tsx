@@ -1,3 +1,4 @@
+import { useListDispatch } from "./TransferListContext";
 import type { Item } from "./types"
 
 interface ListItemProps {
@@ -5,9 +6,10 @@ interface ListItemProps {
 };
 
 export const ListItem = ({ item }: ListItemProps) => {
+  const dispatch = useListDispatch() ?? (() => {});
   return (
     <div>
-      <input type="checkbox" checked={item.isSelected} />
+      <input type="checkbox" checked={item.isSelected} onChange={() => dispatch({ type: 'toggleSelect', label: item.label })} />
       <span>{item.label}</span>
     </div>
   )
