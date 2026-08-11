@@ -70,5 +70,17 @@ export const ListProvider = ({ children }: { children: ReactNode }) => {
     )
 }
 
-export const useList = () => useContext(ListContext);
-export const useListDispatch = () => useContext(ListDispatchContext);
+export const useList = () => {
+    const ctx = useContext(ListContext);
+    if (ctx === null)
+        throw new Error("useList must be used within a ListProvider");
+
+    return ctx;
+}
+export const useListDispatch = () => {
+    const ctx = useContext(ListDispatchContext);
+    if (ctx === null)
+        throw new Error("useListDispatch must be used within a ListProvider");
+
+    return ctx;
+}

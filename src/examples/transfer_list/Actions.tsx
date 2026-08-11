@@ -1,8 +1,8 @@
-import { useList, useListDispatch, type ListState } from "./TransferListContext";
+import { useList, useListDispatch } from "./TransferListContext";
 
 const Actions = () => {
-  const state = useList() ?? {} as ListState;
-  const dispatch = useListDispatch() ?? (() => { });
+  const state = useList();
+  const dispatch = useListDispatch();
 
   const isMoveAllLeftButtonEnabled = state.right.length > 0;
   const isMoveAllRightButtonEnabled = state.left.length > 0;

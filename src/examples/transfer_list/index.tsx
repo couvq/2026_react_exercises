@@ -5,12 +5,12 @@ import { ListProvider, useList } from "./TransferListContext"
 
 const ListContainer = () => {
     const state = useList();
-    
+
     return (
         <div className="transfer-list">
-            <List items={state?.left ?? []} />
+            <List items={state.left} />
             <Actions />
-            <List items={state?.right ?? []} />
+            <List items={state.right} />
         </div>
     )
 }
