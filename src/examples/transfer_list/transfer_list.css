@@ -1,0 +1,10 @@
+.transfer-list {
+  display: flex;
+  gap: 1rem;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}

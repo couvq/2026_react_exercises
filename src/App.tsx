@@ -1,9 +1,10 @@
+import TransferList from "./examples/transfer_list"
 
 const App = () => {
 
   return (
     <>
-      hello world
+      <TransferList />
     </>
   )
 }
