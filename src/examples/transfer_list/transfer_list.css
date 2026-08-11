@@ -7,4 +7,18 @@
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.list_container {
+  min-width: 70px;
 }

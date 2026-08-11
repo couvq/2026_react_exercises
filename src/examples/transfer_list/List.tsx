@@ -6,9 +6,9 @@ interface ListItemProps {
 };
 
 export const ListItem = ({ item }: ListItemProps) => {
-  const dispatch = useListDispatch() ?? (() => {});
+  const dispatch = useListDispatch() ?? (() => { });
   return (
-    <div>
+    <div className='list-item'>
       <input type="checkbox" checked={item.isSelected} onChange={() => dispatch({ type: 'toggleSelect', label: item.label })} />
       <span>{item.label}</span>
     </div>
@@ -21,7 +21,7 @@ interface ListProps {
 
 export const List = ({ items }: ListProps) => {
   return (
-    <div>
+    <div className="list_container">
       {items.map((item) => (
         <ListItem key={item.label} item={item} />
       ))}
