@@ -1,12 +1,5 @@
-import UndoableCounter from "./examples/undoable_counter"
+import Kanban from "./examples/kanban"
 
-const App = () => {
-
-  return (
-    <>
-      <UndoableCounter />
-    </>
-  )
-}
+const App = () => <Kanban />
 
 export default App
