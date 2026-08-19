@@ -1,6 +1,6 @@
 import Column from "./column"
 import Header from "./Header"
-import { useKanban } from "./KanbanContext";
+import { useKanban } from "./hooks";
 
 interface KanbanContentProps {
     headerTitle: string,

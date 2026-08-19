@@ -1,4 +1,5 @@
-import { useKanban, type KanbanColumn } from "./KanbanContext";
+import { useKanban } from "./hooks";
+import { type KanbanColumn } from "./KanbanContext";
 
 const countNumCards = (columns: Map<string, KanbanColumn>): number => {
     let count = 0;
