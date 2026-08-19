@@ -1,5 +1,6 @@
-import Header from "./Header"
+import KanbanContent from "./KanbanContent"
 import { KanbanProvider } from "./KanbanContext"
+import './kanban.css'
 
 interface KanbanProps {
     title: string,
@@ -8,9 +9,7 @@ interface KanbanProps {
 const Kanban = ({ title }: KanbanProps) => {
     return (
         <KanbanProvider>
-            <div>
-                <Header title={title} />
-            </div>
+            <KanbanContent headerTitle={title} />
         </KanbanProvider>
     )
 }

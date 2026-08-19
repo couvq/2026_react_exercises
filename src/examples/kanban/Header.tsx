@@ -1,9 +1,9 @@
 import { useKanban, type KanbanColumn } from "./KanbanContext";
 
-const countNumCards = (board: Map<string, KanbanColumn>): number => {
+const countNumCards = (columns: Map<string, KanbanColumn>): number => {
     let count = 0;
 
-    for (const column of board.values()) {
+    for (const column of columns.values()) {
         count += column.cards.size
     }
 
@@ -15,8 +15,8 @@ interface HeaderProps {
 }
 
 const Header = ({ title }: HeaderProps) => {
-    const { board } = useKanban();
-    const numCards = countNumCards(board);
+    const { columns } = useKanban();
+    const numCards = countNumCards(columns);
 
     return (
         <div>

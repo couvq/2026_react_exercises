@@ -1,18 +1,17 @@
 import { createContext, useContext, useReducer, type Dispatch, type ReactNode } from "react";
 
 export interface KanbanCard {
-    title: string,
     priority: 'low' | 'medium' | 'high',
     date: string,
     assignee: string,
 }
 
 export interface KanbanColumn {
-    cards: Map<string, KanbanCard>
+    cards: Map<string, KanbanCard> // card title -> card, card titles are unique within a column
 }
 
 export interface KanbanState {
-    board: Map<string, KanbanColumn>
+    columns: Map<string, KanbanColumn> // column title -> column, column titles are unique
 }
 
 export type KanbanAction = {
@@ -29,12 +28,12 @@ const kanbanReducer = (state: KanbanState, action: KanbanAction): KanbanState =>
 }
 
 const initialState: KanbanState = {
-    board: new Map<string, KanbanColumn>([
+    columns: new Map<string, KanbanColumn>([
         ['To Do', {
             cards: new Map<string, KanbanCard>([
-                ['task-1', { title: 'Task 1', priority: 'high', date: '2024-06-01', assignee: 'Alice' }],
-                ['task-2', { title: 'Task 2', priority: 'medium', date: '2024-06-02', assignee: 'Bob' }],
-                ['task-3', { title: 'Task 3', priority: 'low', date: '2024-06-03', assignee: 'Charlie' }]
+                ['Task 1', { priority: 'high', date: '2024-06-01', assignee: 'Alice' }],
+                ['Task 2', { priority: 'medium', date: '2024-06-02', assignee: 'Bob' }],
+                ['Task 3', { priority: 'low', date: '2024-06-03', assignee: 'Charlie' }]
             ])
         }],
         ['In Progress', { cards: new Map<string, KanbanCard>() }],
