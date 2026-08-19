@@ -1,9 +1,16 @@
+import Header from "./Header"
 import { KanbanProvider } from "./KanbanContext"
 
-const Kanban = () => {
+interface KanbanProps {
+    title: string,
+}
+
+const Kanban = ({ title }: KanbanProps) => {
     return (
         <KanbanProvider>
-            <div>Kanban</div>
+            <div>
+                <Header title={title} />
+            </div>
         </KanbanProvider>
     )
 }

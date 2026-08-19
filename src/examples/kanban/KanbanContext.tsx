@@ -24,15 +24,19 @@ const kanbanReducer = (state: KanbanState, action: KanbanAction): KanbanState =>
         case 'PLACEHOLDER':
             return state;
         default:
-            throw new Error(`Unknown action: ${action}`);
+            throw new Error(`Unknown action: ${JSON.stringify(action)}`);
     }
 }
 
 const initialState: KanbanState = {
     board: new Map<string, KanbanColumn>([
-        ['To Do', { cards: new Map<string, KanbanCard>([
-            ['task-1', { title: 'Task 1', priority: 'high', date: '2024-06-01', assignee: 'Alice' }],
-        ]) }],
+        ['To Do', {
+            cards: new Map<string, KanbanCard>([
+                ['task-1', { title: 'Task 1', priority: 'high', date: '2024-06-01', assignee: 'Alice' }],
+                ['task-2', { title: 'Task 2', priority: 'medium', date: '2024-06-02', assignee: 'Bob' }],
+                ['task-3', { title: 'Task 3', priority: 'low', date: '2024-06-03', assignee: 'Charlie' }]
+            ])
+        }],
         ['In Progress', { cards: new Map<string, KanbanCard>() }],
         ['Done', { cards: new Map<string, KanbanCard>() }],
     ]),
